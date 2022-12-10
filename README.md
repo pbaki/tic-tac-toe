@@ -1,1 +1,1 @@
-# tic-tac-toe
+Tic Tac Toe browser game using factory funstions and modules
