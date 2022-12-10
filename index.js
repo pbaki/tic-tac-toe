@@ -1,25 +1,26 @@
 const gameBoard = (() => {
     const board = [
-                    ["1", "2", "3"],
-                    ["4", "5", "6"],
-                    ["7", "8", "9"],
+                    ["", "", ""],
+                    ["", "", ""],
+                    ["", "", ""],
                   ];
-    const squares = document.querySelectorAll(".box > div");
-    let counter = -1;
+    const renderContent = () => {
+        const squares = document.querySelectorAll(".box > div");
+        let counter = -1;
         for (let rows of board){
             for (let item of rows){
                 counter += 1;
                 squares[counter].append(item);
             }
-}
+        }
+    };
+    
     return {
         board,
-        squares
-        
+        renderContent,
     };
 })();
-console.log(gameBoard.board);
-console.log(gameBoard.squares);
+gameBoard.renderContent();
 
 
 const gameFlow = (() => {
@@ -31,8 +32,14 @@ const gameFlow = (() => {
 
 
 const Player = (name) => {
+    playerPlay = () => {
 
+    }
+    
 
-    return {name};
+    return {name}
 }
 
+const test1 = Player("X");
+const test2 = Player("O");
+console.log(test1.name, test2.name);
