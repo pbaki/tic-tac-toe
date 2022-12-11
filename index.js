@@ -65,7 +65,7 @@ const Player = (name, sign) => {
     playerPlay = () => {
             let squares = document.querySelectorAll(".box > div"); 
         for (let square of squares){
-            square.addEventListener("click", () => { 
+            square.addEventListener("click", function handler(){ 
             if (squareTracker() == ""){
                 square.append(Player1.sign);
             } else if (square.innerHTML !== ""){
@@ -79,19 +79,22 @@ const Player = (name, sign) => {
             } else {
                 return ""
             }
+            if (playerWin() !== ""){
+                square.innerHTML = "";
+            }
             gameBoard.renderContent();
             playerWin();
-            if (playerWin() !== ""){
-                let congratulations = document.getElementById("congratulations");
-                congratulations.innerHTML = playerWin() + " congratulations!"
-            } else {
-                
+            let congratulations = document.getElementById("congratulations");
+            if (playerWin() == "Draw") {
+                congratulations.innerHTML = playerWin();
+            } else if (playerWin() !== ""){
+                congratulations.innerHTML = playerWin() + " congratulations!";
             }
         })
         }
-
-        
     }
+
+    
     playerWin = () => {
         
         if (gameBoard.board[0][0] == "X" && gameBoard.board[0][1] == "X" && gameBoard.board[0][2] == "X"){
@@ -162,11 +165,6 @@ function checkboxClick(event) {
     return Player1, Player2;
 
 }
-
-
-
-//Player1.playerPlay()
-
 
 
 
