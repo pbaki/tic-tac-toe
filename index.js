@@ -11,7 +11,7 @@ const gameBoard = (() => {
             for (let j = 0; j < board[i].length; j++){
                 if (board[i][j] == ""){
                     board[i][j] = squares[counter].innerHTML;
-                }
+                } 
                 counter += 1;
             }
         }
@@ -28,7 +28,7 @@ gameBoard.renderContent();
 
 
 
-const Player = (sign) => {
+const Player = (name, sign) => {
     squareTracker = () => {
         const squares = document.querySelectorAll(".box > div");
         let tracker = "";
@@ -63,81 +63,144 @@ const Player = (sign) => {
         return oTracker;
     }
     playerPlay = () => {
-        const squares = document.querySelectorAll(".box > div");
+            let squares = document.querySelectorAll(".box > div"); 
         for (let square of squares){
             square.addEventListener("click", () => { 
             if (squareTracker() == ""){
-                square.append(test1.sign);
+                square.append(Player1.sign);
             } else if (square.innerHTML !== ""){
                 square.append("");
             } else if (xTracker() < oTracker()){
-                square.append(test1.sign);
+                square.append(Player1.sign);
             } else if (xTracker() > oTracker()){
-                square.append(test2.sign);
+                square.append(Player2.sign);
             } else if ( xTracker() == oTracker()){
-                square.append(test1.sign);
+                square.append(Player1.sign);
             } else {
                 return ""
             }
             gameBoard.renderContent();
             playerWin();
+            if (playerWin() !== ""){
+                let congratulations = document.getElementById("congratulations");
+                congratulations.innerHTML = playerWin() + " congratulations!"
+            } else {
+                
+            }
         })
         }
+
+        
     }
     playerWin = () => {
         
         if (gameBoard.board[0][0] == "X" && gameBoard.board[0][1] == "X" && gameBoard.board[0][2] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[1][0] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[1][2] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[2][0] == "X" && gameBoard.board[2][1] == "X" && gameBoard.board[2][2] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[0][0] == "X" && gameBoard.board[1][0] == "X" && gameBoard.board[2][0] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[0][1] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[2][1] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[0][2] == "X" && gameBoard.board[1][2] == "X" && gameBoard.board[2][2] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[0][0] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[2][2] == "X"){
-            console.log("X win")
+            return Player1.name + " win";
         } else if (gameBoard.board[0][2] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[2][0] == "X"){
-            console.log("X win")
-        } 
-        if (gameBoard.board[0][0] == "O" && gameBoard.board[0][1] == "O" && gameBoard.board[0][2] == "O"){
-            console.log("O win")
+            return Player1.name + " win";
+        } else if (gameBoard.board[0][0] == "O" && gameBoard.board[0][1] == "O" && gameBoard.board[0][2] == "O"){
+            return Player2.name + " win";
         } else if (gameBoard.board[1][0] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[1][2] == "O"){
-            console.log("O win")
+            return Player2.name + " win";
         } else if (gameBoard.board[2][0] == "O" && gameBoard.board[2][1] == "O" && gameBoard.board[2][2] == "O"){
-            console.log("O win")
+            return Player2.name + " win";
         } else if (gameBoard.board[0][0] == "O" && gameBoard.board[1][0] == "O" && gameBoard.board[2][0] == "O"){
-            console.log("O win")
+            return Player2.name + " win";
         } else if (gameBoard.board[0][1] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[2][1] == "O"){
-            console.log("O win")
+            return Player2.name + " win";
         } else if (gameBoard.board[0][2] == "O" && gameBoard.board[1][2] == "O" && gameBoard.board[2][2] == "O"){
-            console.log("O win")
+            return Player2.name + " win";
         } else if (gameBoard.board[0][0] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[2][2] == "O"){
-            console.log("O win")
+            return Player2.name + " win";
         } else if (gameBoard.board[0][2] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[2][0] == "O"){
-            cnsole.log("O win")
-        } 
+            return Player2.name + " win";
+        } else {
+            let checkall = "";
+            for (let i = 0; i < gameBoard.board.length; i++){
+                for (let j = 0; j < gameBoard.board[i].length; j++){
+                    if (gameBoard.board[i][j] !== ""){
+                        checkall += "a";
+                    } 
+                }
+            }
+            return checkall.length == 9 ? "Draw" : "";
+        }
+
     }
+    
 
     
 
-    return {sign, playerPlay, }
+    return {sign, playerPlay, name, playerWin}
 }
 
-const test1 = Player("X");
-const test2 = Player("O");
-test1.playerPlay()
-console.log(test1.sign, test2.sign);
+let Player1 = Player("default1", "X");
+let Player2 = Player("default2", "O");
+
+const name1 = document.getElementById("name1");
+const name2 = document.getElementById("name2");
+const checkbox = document.querySelector("#formbutton");
+checkbox.addEventListener("click", checkboxClick);
+
+function checkboxClick(event) {
+    Player1 = Player(name1.value, "X");
+    Player2 = Player(name2.value, "O");
+    console.log(Player1);
+    event.preventDefault();
+    return Player1, Player2;
+
+}
+
+
+
+//Player1.playerPlay()
+
 
 
 
 
 const gameFlow = (() => {
+    const start = () => {
+        if (Player1.name !== "" && Player2.name !== ""){
+            Player1.playerPlay()
+        }
 
+    }
+    const restart = () => {
+        let squares = document.querySelectorAll(".box > div");
+        for (let square of squares){
+            square.innerHTML = "";
+            congratulations.innerHTML = "";
+            for (let i = 0; i < gameBoard.board.length; i++){
+                for (let j = 0; j < gameBoard.board[i].length; j++){
+                    if (gameBoard.board[i][j] !== ""){
+                        gameBoard.board[i][j] = "";
+                    } 
+                }
+            }
+        }
+    }
+    const restartbutton = document.getElementById("restartbutton");
+    restartbutton.addEventListener("click", () => {
+        restart()
+    })
+    const startbutton = document.getElementById("startbutton")
+    startbutton.addEventListener("click", () => {
+        start()
+    })
 
-
+    return {start, restart};
 })();
 
