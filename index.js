@@ -80,8 +80,46 @@ const Player = (sign) => {
                 return ""
             }
             gameBoard.renderContent();
+            playerWin();
         })
         }
+    }
+    playerWin = () => {
+        
+        if (gameBoard.board[0][0] == "X" && gameBoard.board[0][1] == "X" && gameBoard.board[0][2] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[1][0] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[1][2] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[2][0] == "X" && gameBoard.board[2][1] == "X" && gameBoard.board[2][2] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[0][0] == "X" && gameBoard.board[1][0] == "X" && gameBoard.board[2][0] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[0][1] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[2][1] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[0][2] == "X" && gameBoard.board[1][2] == "X" && gameBoard.board[2][2] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[0][0] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[2][2] == "X"){
+            console.log("X win")
+        } else if (gameBoard.board[0][2] == "X" && gameBoard.board[1][1] == "X" && gameBoard.board[2][0] == "X"){
+            console.log("X win")
+        } 
+        if (gameBoard.board[0][0] == "O" && gameBoard.board[0][1] == "O" && gameBoard.board[0][2] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[1][0] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[1][2] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[2][0] == "O" && gameBoard.board[2][1] == "O" && gameBoard.board[2][2] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[0][0] == "O" && gameBoard.board[1][0] == "O" && gameBoard.board[2][0] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[0][1] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[2][1] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[0][2] == "O" && gameBoard.board[1][2] == "O" && gameBoard.board[2][2] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[0][0] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[2][2] == "O"){
+            console.log("O win")
+        } else if (gameBoard.board[0][2] == "O" && gameBoard.board[1][1] == "O" && gameBoard.board[2][0] == "O"){
+            cnsole.log("O win")
+        } 
     }
 
     
